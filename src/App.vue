@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <AppHeader @clickBtn = 'userSearch'/>
-    <FilmLibrary/>
+    
+    <FilmLibrary :moviesList= 'filmsList'/>
   </div>
 </template>
 

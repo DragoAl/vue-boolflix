@@ -1,14 +1,11 @@
 <template>
     <header>
-        <form action="">
-            <input type="text" v-model.trim="inputText">
-            <button @click="$emit('clickBtn', inputText)">Cerca</button>
-        </form>
+        <input type="text" v-model.trim="inputText">
+        <button @click="$emit('clickBtn', inputText)">Cerca</button>
     </header>
 </template>
 
 <script>
-
 
 export default {
     name:'AppHeader',
@@ -16,10 +13,8 @@ export default {
     data() {
         return {
             inputText: '' 
-
         }
     }
-
 }
 </script>
 
