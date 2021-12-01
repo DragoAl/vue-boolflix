@@ -1,20 +1,29 @@
 <template>
 <section>
     <Film
-     v-for ="movie, i in moviesList"
-     :key="i"
-     :details="movie"/>
+     v-for ="movie in moviesList"
+     :key="movie.id"
+     :details="movie"
+    />
+    <TvSeries
+     v-for ="tv in tvList"
+     :key="tv.id"
+     :details="tv"
+    />
 </section>
 </template>
 
 <script>
 // import axios from 'axios'
 import Film from '../components/Film.vue'
+import TvSeries from '../components/TvSeries.vue'
+
 
 export default {
     name:"FilmLibrary",
     components: {
-        Film
+        Film,
+        TvSeries
     },
     data() {
         return {
@@ -22,7 +31,8 @@ export default {
         }
     },
     props: {
-        moviesList: Array
+        moviesList: Array,
+        tvList: Array
     },
     created() {
         

@@ -2,7 +2,10 @@
   <div id="app">
     <AppHeader @clickBtn = 'userSearch'/>
     
-    <FilmLibrary :moviesList= 'filmsList'/>
+    <FilmLibrary 
+    :moviesList= 'filmsList'
+    :tvList= 'tvSeries'
+    />
   </div>
 </template>
 
@@ -15,13 +18,14 @@ export default {
   name: 'App',
   components: {
     AppHeader,
-    FilmLibrary
+    FilmLibrary,
   },
   data() {
     return {
-      apiUrl: 'https://api.themoviedb.org/3/search/movie',
+      apiUrl: 'https://api.themoviedb.org/3/search/',
       apiKey: '0e7cd09201aa25f0f40469f08d9be41c',
       filmsList : [],
+      tvSeries: []
       // searchedFilm : ''
     }
   },
@@ -31,16 +35,33 @@ export default {
   // created() {
   //   this.getFilm(this.apiParams);
   // },
-  computed: {
+  // computed: {
+  //   filmSeries() {
+  //     return [...this.filmsList,...this.tvSeries]
+  //   }
 
-  },
+  // },
   methods: {
     getFilm: function(apiParams) {
       axios
-      .get(this.apiUrl,apiParams)
+      .get(this.apiUrl +'movie',apiParams)
       .then((result) => {
         this.filmsList = result.data.results;
-        console.log(this.filmsList);
+        console.log("film",this.filmsList);
+
+      
+      })
+      .catch((error) => {
+        console.log('errore', error);
+      })
+       
+    },
+    getTvSeries: function(apiParams) {
+      axios
+      .get(this.apiUrl +'tv',apiParams)
+      .then((result) => {
+        this.tvSeries = result.data.results;
+        console.log("serie",this.tvSeries);
 
       
       })
@@ -58,6 +79,7 @@ export default {
         }
       }
       this.getFilm(paramsSearch);
+      this.getTvSeries(paramsSearch);
       
   
 
