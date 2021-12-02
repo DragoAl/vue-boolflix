@@ -9,7 +9,9 @@
         <div v-else><img class="flags" src='../assets/img/arco-flag.png' alt="arcobaleno">Lang= {{details.original_language}} </div>
 
 
-        <div >{{voteBase5}} </div>
+        <!-- <div >{{voteBase5}} </div> -->
+       <i v-for="n in voteBase5 " :key="n" class="fas fa-star full-star"> </i>
+       <i v-for="y in 5 - voteBase5 " :key="y" class="far fa-star empty-star"></i>
         
         
     </div>
@@ -24,23 +26,29 @@ export default {
             sizeImg:'w342/',
             posterPath: this.details.poster_path, 
             originalVoteAvg: this.details.vote_average,
-            voteBase5:''
+            voteBase5:'',
             
         }
     },
+
     props: {
         details: Object,
     },
+
     created() {
         this.vote1to5()
-
-
+       
     },
+    computed: {
+        
+    },
+
     methods : {
         vote1to5() {
             console.log(this.vote =this.originalVoteAvg / 2);
             return this.voteBase5 =Math.floor(this.originalVoteAvg / 2)
-        }
+        },
+        
     }
 
 }
@@ -52,6 +60,10 @@ export default {
 }
 .flags{
     width: 20px;
+}
+.full-star {
+    
+    
 }
 
 </style>

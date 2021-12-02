@@ -9,7 +9,10 @@
         <div v-else><img class="flags" src='../assets/img/arco-flag.png' alt="arcobaleno">Lang= {{details.original_language}} </div>
 
 
-        <div>{{voteBase5}}</div>
+        <!-- <div>{{voteBase5}}</div> -->
+        <i v-for="o in voteBase5 " :key="o" class="fas fa-star full-star"> </i>
+       <i v-for="y in 5 - voteBase5 " :key="y" class="far fa-star empty-star"></i>
+
         
         
     </div>
