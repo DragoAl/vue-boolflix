@@ -2,18 +2,25 @@
     <div id="tvseries">
         <img class="poster" :src="baseUrl + sizeImg + posterPath" :alt= details.original_title>
         <div class="infocards">
-            <h3>{{details.original_name}}</h3>
-            <h4>{{details.name}}</h4>
+            <h4>Titolo : <span>{{details.original_name}}</span></h4>
+            <h4>Titolo Originale : <span>{{details.name}}</span></h4>
             
-            <div v-if="details.original_language === 'it' "><img class="flags" src= '../assets/img/ita-flag.png' alt="italy"></div>
-            <div v-else-if="details.original_language === 'en' "><img class="flags" src= '../assets/img/greatbritain-flag.png' alt="greatbritain"></div>
-            <div v-else><img class="flags" src='../assets/img/arco-flag.png' alt="arcobaleno">Lang= {{details.original_language}} </div>
-
+            <div v-if="details.original_language === 'it' "><h4>Lingua Originale:</h4> <img class="flags" src= '../assets/img/ita-flag.png' alt="italy"></div>
+            <div v-else-if="details.original_language === 'en' "><h4>Lingua Originale:</h4><img class="flags" src= '../assets/img/greatbritain-flag.png' alt="greatbritain"></div>
+            <div v-else><h4>Lingua Originale:</h4><img class="flags" src='../assets/img/arco-flag.png' alt="arcobaleno">Lang= {{details.original_language}} </div>
 
             <!-- <div >{{voteBase5}} </div> -->
-            <i v-for="n in voteBase5 " :key="'full'+n" class="fas fa-star full-star"> </i>
-            <i v-for="y in 5 - voteBase5 " :key="'empty'+y" class="far fa-star empty-star"></i>
-
+            <div class="voto">
+                <h4>Voto:</h4>
+                <i v-for="n in voteBase5 " :key="'full'+n" class="fas fa-star full-star"> </i>
+                <i v-for="y in 5 - voteBase5 " :key="'empty'+y" class="far fa-star empty-star"></i>
+            </div>
+            
+            <div class="overview">
+                <h4>Overview: </h4>
+                <p>{{details.overview}} </p>
+            </div>
+           
         </div>
         
         
@@ -67,23 +74,42 @@ export default {
     }
 
     .infocards {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: white;
-    border: 1px solid white;
-    background-color: black;
-    width: 100%;
-    height: 100%;
-    display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: white;
+        border: 1px solid white;
+        background-color: black;
+        width: 100%;
+        height: 100%;
+        display: none;
+        padding: 0 15px;
+
     }
 
     .poster {
         border: 1px solid white;
     }
 }
+h4 {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.voto {
+    margin-top: 10px;
+}
+.overview {
+    margin-top:10px ;
+    p {
+        height: 40vh;
+        overflow: scroll;
+    }
+}
 .flags{
     width: 20px;
+    transform: translate(40%, 25%);
+
 }
 
 
