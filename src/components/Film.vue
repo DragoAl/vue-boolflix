@@ -1,5 +1,5 @@
 <template>
-    <div id="movie"  @click.prevent="$emit('clickFilm',idFilm)">
+    <div id="movie"  @click="$emit('clickFilm',idFilm)" >
         
         <img class="poster" :src="baseUrl + sizeImg + posterPath" :alt= details.original_title>
         <div class="infocards">
@@ -23,8 +23,8 @@
             
           
         </div>
-        <div class="cast">
-            <div v-for="actor, i in castArray.slice(0, 5) " :key="'actor' + i">{{actor.name}}</div>
+        <div class="cast" v-if="activeMovie === true && idActive === idFilm ">
+            <div  v-for="actor, i in castArray.slice(0, 5) " :key="'actor' + i">{{actor.name}}</div>
 
         </div>
     </div>
@@ -40,12 +40,15 @@ export default {
             posterPath: this.details.poster_path,
             originalVoteAvg: this.details.vote_average,
             voteBase5:'' ,
-            idFilm: this.details.id
+            idFilm: this.details.id,
+            
         }
     },
     props: {
         details: Object,
-        castArray:Array
+        castArray:Array,
+        activeMovie: Boolean,
+        idActive: Number
     },
     created() {
         this.vote1to5()

@@ -6,6 +6,8 @@
      :key="movie.id"
      :details="movie"
      :castArray= 'castList'
+     :activeMovie= 'activeFilm'
+     :idActive="activeId"
     />
     <TvSeries
      v-for ="tv in tvList"
@@ -30,7 +32,8 @@ export default {
     data() {
         return {
         castList: [],
-        movieID: ''
+        activeFilm: '',
+        activeId:''
 
 
         }
@@ -53,6 +56,16 @@ export default {
                 this.castList = result.data.credits.cast;
                 console.log("cast",this.castList);
             })
+            
+            this.activeId = filmId
+            if (this.activeFilm === true) {
+                this.activeFilm = false
+                
+            } else {
+                this.activeFilm = true
+                
+            }
+            
         
         },
         castSearch(clickId){
