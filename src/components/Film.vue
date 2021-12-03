@@ -21,12 +21,18 @@
                 <p>{{details.overview}} </p>
             </div>
             
+            <div class="cast" v-if="activeMovie === true && idActive === idFilm ">
+                <h4>Cast</h4>
+                <div  v-for="actor, i in castArray.slice(0, 5) " :key="'actor' + i">{{actor.name}}</div>
+                
+                <h4>Generi</h4>
+                <div  v-for="genre, i in listGenre.slice(0, 5) " :key="'genre' + i">{{genre.name}}</div>
+
+
+            </div>
           
         </div>
-        <div class="cast" v-if="activeMovie === true && idActive === idFilm ">
-            <div  v-for="actor, i in castArray.slice(0, 5) " :key="'actor' + i">{{actor.name}}</div>
-
-        </div>
+       
     </div>
 </template>
 
@@ -48,7 +54,8 @@ export default {
         details: Object,
         castArray:Array,
         activeMovie: Boolean,
-        idActive: Number
+        idActive: Number,
+        listGenre: Array
     },
     created() {
         this.vote1to5()
@@ -83,6 +90,7 @@ export default {
         height: 100%;
         display: none;
         padding: 0 15px;
+        overflow: scroll;
     }
 
     .poster {
@@ -103,6 +111,10 @@ h4 {
         height: 40vh;
         overflow: scroll;
     }
+}
+
+.cast {
+    overflow: scroll;
 }
 
 .flags {

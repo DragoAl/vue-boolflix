@@ -1,5 +1,5 @@
 <template>
-    <div id="tvseries">
+    <div id="tvseries" @click="$emit('clickTv',idTv)">
         <img class="poster" :src="baseUrl + sizeImg + posterPath" :alt= details.original_title>
         <div class="infocards">
             <h4>Titolo : <span>{{details.original_name}}</span></h4>
@@ -20,6 +20,16 @@
                 <h4>Overview: </h4>
                 <p>{{details.overview}} </p>
             </div>
+            
+            <div class="cast" v-if="activeTv === true && idActive === idTv ">
+                <h4>Cast</h4>
+                <div  v-for="actor, i in castArray.slice(0, 5) " :key="'actor' + i">{{actor.name}}</div>
+                
+                <h4>Generi</h4>
+                <div  v-for="genre, i in listGenreTv.slice(0, 5) " :key="'genre' + i">{{genre.name}}</div>
+
+
+            </div>
            
         </div>
         
@@ -37,12 +47,18 @@ export default {
             posterPath: this.details.poster_path, 
             originalVoteAvg: this.details.vote_average,
             voteBase5:'',
+            idTv: this.details.id,
+
             
         }
     },
 
     props: {
         details: Object,
+        castArray:Array,
+        activeTv: Boolean,
+        idActive: Number,
+        listGenreTv: Array
     },
 
     created() {
@@ -81,6 +97,7 @@ export default {
         height: 100%;
         display: none;
         padding: 0 15px;
+        overflow: scroll;
 
     }
 
@@ -103,6 +120,11 @@ h4 {
         overflow: scroll;
     }
 }
+
+.cast {
+    overflow: scroll;
+}
+
 .flags{
     width: 20px;
     transform: translate(40%, 25%);
