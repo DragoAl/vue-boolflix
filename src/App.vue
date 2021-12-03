@@ -5,6 +5,7 @@
     <FilmLibrary 
     :moviesList= 'filmsList'
     :tvList= 'tvSeries'
+    
     />
   </div>
 </template>
@@ -24,8 +25,10 @@ export default {
     return {
       apiUrl: 'https://api.themoviedb.org/3/search/',
       apiKey: '0e7cd09201aa25f0f40469f08d9be41c',
+      credits: 'credits',
       filmsList : [],
-      tvSeries: []
+      tvSeries: [],
+      // castList: []
       // searchedFilm : ''
     }
   },
@@ -47,29 +50,44 @@ export default {
       .get(this.apiUrl +'movie',apiParams)
       .then((result) => {
         this.filmsList = result.data.results;
-        console.log("film",this.filmsList);
-
-      
       })
       .catch((error) => {
         console.log('errore', error);
       })
-       
     },
+
     getTvSeries: function(apiParams) {
       axios
       .get(this.apiUrl +'tv',apiParams)
       .then((result) => {
         this.tvSeries = result.data.results;
-        console.log("serie",this.tvSeries);
-
-      
       })
       .catch((error) => {
         console.log('errore', error);
       })
-       
     },
+
+    // getCast: function(apiParams) {
+    //   axios
+    //   .get(this.apiUrl +'movie',apiParams)
+    //   .then((result) => {
+    //     this.castList = result.data.credits.cast;
+    //     console.log("cast",this.castList);
+    //   })
+    //   .catch((error) => {
+    //     console.log('errore', error);
+    //   })
+    // },
+    // getCast(filmId) {
+    //   axios
+    //   .get('https://api.themoviedb.org/3/movie/',filmId,'?api_key=0e7cd09201aa25f0f40469f08d9be41c&append_to_response=credits')
+    //   .then((result) => {
+    //     this.castList = result.data.credits.cast;
+    //     console.log("cast",this.castList);
+    //   })
+      
+    // },
+
     userSearch (inputText) {
       const paramsSearch= {
         params: {
@@ -80,11 +98,19 @@ export default {
       }
       this.getFilm(paramsSearch);
       this.getTvSeries(paramsSearch);
-      
-  
+    },
 
-    } 
+    // castSearch (filmId) {
+    //   const castParams= {
+    //     params: {
+    //       movie_id:filmId,
+    //       api_key: this.apiKey,
+    //       append_to_response: this.credits
+    //     }
+    //   }
+    //   this.getCast(castParams);
 
+    // }
   }
 }
 </script>
@@ -105,7 +131,6 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
   color: white;
 }
 </style>

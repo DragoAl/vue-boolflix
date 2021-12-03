@@ -1,5 +1,6 @@
 <template>
-    <div id="movie">
+    <div id="movie"  @click.prevent="$emit('clickFilm',idFilm)">
+        
         <img class="poster" :src="baseUrl + sizeImg + posterPath" :alt= details.original_title>
         <div class="infocards">
             <h4>Titolo : <span>{{details.original_title}}</span></h4>
@@ -8,7 +9,6 @@
             <div v-if="details.original_language === 'it' "><h4>Lingua Originale:</h4> <img class="flags" src= '../assets/img/ita-flag.png' alt="italy"></div>
             <div v-else-if="details.original_language === 'en' "><h4>Lingua Originale:</h4><img class="flags" src= '../assets/img/greatbritain-flag.png' alt="greatbritain"></div>
             <div v-else><h4>Lingua Originale:</h4><img class="flags" src='../assets/img/arco-flag.png' alt="arcobaleno">Lang= {{details.original_language}} </div>
-
 
             <!-- <div>{{voteBase5}}</div> -->
             <div class="voto"> 
@@ -23,6 +23,10 @@
             
           
         </div>
+        <div class="cast">
+            <div v-for="actor, i in castArray.slice(0, 5) " :key="'actor' + i">{{actor.name}}</div>
+
+        </div>
     </div>
 </template>
 
@@ -35,11 +39,13 @@ export default {
             sizeImg:'w342/',
             posterPath: this.details.poster_path,
             originalVoteAvg: this.details.vote_average,
-            voteBase5:'' 
+            voteBase5:'' ,
+            idFilm: this.details.id
         }
     },
     props: {
         details: Object,
+        castArray:Array
     },
     created() {
         this.vote1to5()
@@ -47,7 +53,6 @@ export default {
 
     methods : {
         vote1to5() {
-            console.log(this.vote =this.originalVoteAvg / 2);
             return this.voteBase5 =Math.ceil(this.originalVoteAvg / 2)
         }
     }
@@ -58,6 +63,7 @@ export default {
 #movie {
     margin: 30px;
     position: relative;
+    cursor: pointer;
     
     &:hover .infocards  {
         display: block;

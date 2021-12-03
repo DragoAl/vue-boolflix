@@ -47,7 +47,6 @@ export default {
 
     created() {
         this.vote1to5()
-       
     },
     computed: {
         
@@ -55,10 +54,8 @@ export default {
 
     methods : {
         vote1to5() {
-            console.log(this.vote =this.originalVoteAvg / 2);
             return this.voteBase5 =Math.floor(this.originalVoteAvg / 2)
         },
-        
     }
 
 }
